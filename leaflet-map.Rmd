@@ -1,0 +1,27 @@
+---
+title: "Creating a web page using R Markdown that features a map created with Leaflet"
+author: "Jatin chawda"
+date: "1/28/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+```{r echo=TRUE}
+library(leaflet)
+```
+
+```{r echo = TRUE}
+state_capitals <- read.csv("indiacitieswithcapitals.csv")
+state_dim <- data.frame(Lat = state_capitals$Lat,
+                        Long = state_capitals$Long)
+```
+
+```{r echo=TRUE}
+state_dim %>% 
+  leaflet() %>%
+  addTiles() %>%
+  addMarkers(clusterOptions = markerClusterOptions())
+  
+```
